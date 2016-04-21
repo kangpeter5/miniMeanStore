@@ -1,0 +1,37 @@
+<div>
+<h2>Add new Order</h2>
+<form ng-submit="addOrder()">
+	<div>
+		Customer: <select ng-model='new_order.name' ng-options='user.name as user.name for user in users'></select>
+	</div>
+	<div>
+		Order: <input type="number" min="1" ng-model="new_order.qty" ng-init="new_order.qty=1" />
+
+		<select ng-model="new_order.product" ng-init="new_order.product = products[0].name" ng-options="product.name as product.name for product in products"></select>
+		<div ng-show='qty_error'>{{qty_msg}}</div>
+	</div>
+
+	<button type="submit">Add</button>
+</form>
+<div>
+	<input type="text" ng-model="filter_name" placeholder="search order..." />
+</div>
+<table>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Product</th>
+			<th>Quantity</th>
+			<th>Created Date</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat='order in orders | filter: filter_name track by $index'>
+			<td>{{order.name}}</td>
+			<td>{{order.product}}</td>
+			<td>{{order.qty}}</td>
+			<td>{{order.created_at | date: 'MMMM dd, yyyy'}}</td>
+		</tr>
+	</tbody>
+</table>
+</div>

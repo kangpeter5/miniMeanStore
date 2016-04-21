@@ -1,0 +1,32 @@
+<div class="container">
+<div id="nav">
+	<form>
+		<input type='text' ng-model="filter_name" placeholder="search name..." />
+		<button type="submit">Filter</button>
+	</form>
+
+	<form ng-submit="addProduct()">
+		<h3>Add a new product</h3>
+		<div class="dup" ng-show="isDuplicate()">{{dup.msg}}</div>
+		<p>Name: </p>
+		<p><input type="text" placeholder="name" ng-model="new_product.name" /></p>
+		<p>Image: </p>
+		<p><input type="text" placeholder="http://" ng-model="new_product.img" /></p>
+		<p>Description: </p>
+		<textarea ng-model="new_product.desc"></textarea>
+		<p>Initial Quantity: </p>
+		<p><input type="number" ng-model="new_product.qty" ng-init="new_product.qty=1" min="1" /></p>
+		<button type="submit">Create</button>
+	</form>
+</div>
+<div id="content">
+	<div id="products">
+		<div class="product" ng-repeat='product in products | filter: filter_name track by $index'>
+			<img ng-src="./static/images/{{product.img}}" style="width:100px; height:100px;">
+			<p>{{product.name}}</p>
+			<p>{{product.qty}} are left</p>
+		</div>
+	</div>
+	<a href="#/products">show more...</a>
+</div>
+</div>
